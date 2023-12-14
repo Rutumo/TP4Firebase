@@ -1,5 +1,6 @@
 package com.eric.tp4firebase.screens
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.text.TextUtils
 import android.widget.Toast
@@ -12,31 +13,75 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.eric.tp4firebase.modele.Commentaires
 import com.eric.tp4firebase.viewmodeles.AuthViewModele
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CommentsScreen(navController: NavController, vm: AuthViewModele) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxSize()
+fun CommentsScreen(navController: NavController, authvm: AuthViewModele) {
+    var loggedIn by remember {
+        mutableStateOf(IsLoggedIn())
+    }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.background,
+                ),
+                title = {
+                    Text("Commentez!!!",
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.End,
+                        color = Color.Black
+                    )
+
+
+                    Button(onClick = {
+                        Firebase.auth.signOut()
+                        loggedIn = IsLoggedIn()
+                        navController.navigate(DestinationScreen.Main.route)
+                    },
+                        modifier = Modifier.height(50.dp).width(120.dp)
+
+                    ) {
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text("Signout",
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                    }
+                }
+            )
+        }
 
     ) {
         registerScreen(LocalContext.current, navController)
@@ -165,3 +210,4 @@ fun ajouterDesAvis(
     }
 
 }
+
