@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "722862819422",
+    "project_id": "tp4firebase-9eb73",
+    "storage_bucket": "tp4firebase-9eb73.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722862819422:android:ceb4222e3b278706a14ccf",
+        "android_client_info": {
+          "package_name": "com.eric.tp4firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722862819422-405kdfmmdug2ofnhvbq01t24046t21vi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1Ze1hstVmONDpt12mvhwghL9BUNPYHYE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722862819422-405kdfmmdug2ofnhvbq01t24046t21vi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
